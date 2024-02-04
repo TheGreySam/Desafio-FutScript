@@ -10,7 +10,7 @@ app.use(cors())
 const { obtenerJugadores, registrarJugador } = require('./controllers/jugadores')
 const { obtenerEquipos, agregarEquipo } = require('./controllers/equipos');
 const {verifyCred}  = require('./db/consultas');
-const {secretKey} = require('.utils')
+//const {secretKey} = require('.utils')
 
 
 

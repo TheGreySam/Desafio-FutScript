@@ -25,8 +25,11 @@ const getTeams = async () => {
 //SELECT * FROM jugadores WHERE id_equipo =1$
 const getPlayers = async (teamID) => {
     try {
-        const players = await db.query('SELECT * FROM jugadores WHERE id_equipo = $1', [teamID]);
-        return players.rows;
+        const consulta = 'SELECT * FROM jugadores WHERE id = $1'
+        const value = teamID
+        const players = await pool.query(consulta, value);
+        console.log(players.rows)
+        return players
     } catch (error) {
         throw error;
     }
