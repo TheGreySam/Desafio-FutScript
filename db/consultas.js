@@ -22,10 +22,15 @@ const getTeams = async () => {
     console.log(team.rows)
     return team
 }
-
+//SELECT * FROM jugadores WHERE id_equipo =1$
 const getPlayers = async (teamID) => {
-    //...
-}
+    try {
+        const players = await db.query('SELECT * FROM jugadores WHERE id_equipo = $1', [teamID]);
+        return players.rows;
+    } catch (error) {
+        throw error;
+    }
+};
 
 const addTeam = async (equipo) => {
     //...
