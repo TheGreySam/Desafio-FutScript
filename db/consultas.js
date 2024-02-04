@@ -25,8 +25,8 @@ const getTeams = async () => {
 //SELECT * FROM jugadores WHERE id_equipo =1$
 const getPlayers = async (teamID) => {
     try {
-        const consulta = 'SELECT * FROM jugadores WHERE id = $1'
         const value = teamID
+        const consulta = 'SELECT * FROM jugadores WHERE id = $1'
         const players = await pool.query(consulta, value);
         console.log(players.rows)
         return players
@@ -36,11 +36,27 @@ const getPlayers = async (teamID) => {
 };
 
 const addTeam = async (equipo) => {
-    //...
+    try {
+        const value = equipo
+        const consulta = 'INSERT INTO equipos values(DEFAULT, name = $1)'
+        const teams = await pool.query(consulta, value);
+        console.log(teams.rows)
+        return teams
+    } catch (error) {
+        throw error;
+    }
 }
 
 const addPlayer = async ({ jugador, teamID }) => {
-    //...
+    try {
+        const value = [jugador, teamID]
+        const consulta = 'INSERT INTO jugadores values(DEFAULT, name = $1, id_equipo = $2)'
+        const player = await pool.query(consulta, value);
+        console.log(player.rows)
+        return player
+    } catch (error) {
+        throw error;
+    }
 }
 
 module.exports = { getTeams, addTeam, getPlayers, addPlayer, verifyCred }
